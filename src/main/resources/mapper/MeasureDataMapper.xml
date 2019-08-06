@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mysiteforme.admin.dao.MeasureDataDao" >
+    <select id="selectMeasureDataByDate" resultType="java.util.Map">
+        SELECT
+            result,(@i:=@i+1) as hour
+        FROM
+            measure_data,(select @i:=-1) as it
+        WHERE
+            DATE_FORMAT(measure_time,'%Y-%m-%d') = #{date}
+        ORDER BY measure_time ASC
+    </select>
+</mapper>
